@@ -17,14 +17,14 @@
                 android:padding="@dimen/dp10"
                 android:background="@drawable/cards_example_mag">
                 <TextView
-                    android:id="@+id/card_name"
+                    android:id="@+id/card_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Card_name"
+                    android:text="Card_number"
                     android:textSize="20dp"
                     android:layout_marginTop="22dp"
                     android:textColor="@color/cardview_light_background"
-                    tools:text="Name" />
+                    tools:text="Card number" />
                 <TextView
                     android:id="@+id/card_cash"
                     android:layout_width="match_parent"
@@ -36,14 +36,14 @@
                     android:layout_marginTop="@dimen/dp10"
                     tools:text="CASH $"/>
                 <TextView
-                    android:id="@+id/card_number"
+                    android:id="@+id/card_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Card_number"
+                    android:text="Card_name"
                     android:textSize="26dp"
                     android:layout_marginLeft="@dimen/dp10"
                     android:layout_marginRight="@dimen/dp10"
-                    tools:text="Card number"/>
+                    tools:text="Name"/>
                 <TextView
                     android:id="@+id/card_expdate"
                     android:layout_width="match_parent"

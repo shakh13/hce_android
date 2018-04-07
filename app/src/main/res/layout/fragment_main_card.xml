@@ -1,70 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="76dp">
 
-    <LinearLayout
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:toolbarId="@+id/toolbar"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+            app:contentScrim="?attr/colorPrimary">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp24"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/main_card_name"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/dp24"
+                    android:text="Shakhzod Saidmurodov"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText,SpUsage" />
+
+                <TextView
+                    android:id="@+id/main_card_num"
+                    android:text="8600 3129 6976 5276"
+                    android:textSize="@dimen/dp32"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText,SpUsage" />
+
+                <TextView
+                    android:id="@+id/main_card_balance"
+                    android:paddingTop="@dimen/dp16"
+                    android:textSize="@dimen/dp48"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="313.000 UZS"
+                    android:textColor="@color/colorWhite"
+                    android:paddingBottom="@dimen/dp16"
+                    tools:ignore="HardcodedText,SpUsage" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="viewEnd"
+                    android:text="Действует до 12/19"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/dp16"
+                    tools:ignore="HardcodedText,SpUsage" />
+
+            </LinearLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        tools:ignore="UselessParent"
-        android:padding="@dimen/dp24"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/main_card_name"
-            android:textSize="@dimen/dp24"
-            android:text="Shakhzod Saidmurodov"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="HardcodedText,SpUsage" />
-
-        <TextView
-            android:id="@+id/main_card_num"
-            android:text="8600 3129 6976 5276"
-            android:textSize="@dimen/dp32"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="HardcodedText,SpUsage" />
-
-        <TextView
-            android:id="@+id/main_card_balance"
-            android:paddingTop="@dimen/dp48"
-            android:textSize="@dimen/dp48"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="313.000 UZS"
-            android:textColor="#000"
-            android:paddingBottom="@dimen/dp16"
-            tools:ignore="HardcodedText,SpUsage" />
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp24">
+
             <ImageView
-                android:layout_alignParentTop="true"
-                android:layout_width="@dimen/nav_header_height"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="50dp"
-                android:labelFor="@+id/nfc_service_toggler"
-                android:src="@drawable/nfc_sign"/>
-            <ToggleButton
                 android:id="@+id/nfc_service_toggler"
-                android:layout_alignParentBottom="true"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textOn="Enabled"
-                android:textOff="Disabled"
-                tools:ignore="HardcodedText" />
+                android:src="@drawable/logo0disabled"
+
+                tools:ignore="ContentDescription" />
+
         </RelativeLayout>
 
-    </LinearLayout>
 
-</RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
+
+
+

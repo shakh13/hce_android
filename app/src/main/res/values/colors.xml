@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#29487d</color>
-    <color name="colorPrimaryDark">#294870</color>
+    <color name="colorPrimaryDark">#264477</color>
     <color name="colorAccent">#CCC</color>
     <color name="colorWhite">#FFF</color>
     <color name="card_bg">#DDD</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

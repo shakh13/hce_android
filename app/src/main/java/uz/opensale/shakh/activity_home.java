@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -28,9 +29,12 @@ import io.realm.Realm;
 import uz.opensale.shakh.fragments.FragmentCards;
 import uz.opensale.shakh.fragments.FragmentHistory;
 import uz.opensale.shakh.fragments.FragmentMainCard;
+import uz.opensale.shakh.fragments.FragmentSettings;
 
 public class activity_home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnNavigationItemSelectedListener {
+
+    public static boolean HCE_ENABLED = false;
 
     @SuppressLint("StaticFieldLeak")
     private static Context context;
@@ -86,15 +90,6 @@ public class activity_home extends AppCompatActivity
 
         mainMenuName.setText(checkUser.getUserFullname());  // Set main menu username
         //mainMenuPhone.setText("+998" + checkUser.getUser().getPhone()); // Set main menu user phone number
-
-
-        ToggleButton mswitch = navigationView.getMenu().findItem(R.id.show_secure).getActionView().findViewById(R.id.switch_show_protected); // Main menu Toggle Button init
-        mswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {   // Main menu toggle button listener
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Toast.makeText(context, isChecked ? "Checked" : "Not checked", Toast.LENGTH_LONG).show();
-            }
-        });
 
         getFragmentManager().beginTransaction().replace(R.id.fragments, new FragmentMainCard()).commit();
 
@@ -170,18 +165,25 @@ public class activity_home extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.show_secure) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.menu_home) {
+            ft.replace(R.id.fragments, new FragmentMainCard());
+            ft.commit();
+        } else if (id == R.id.menu_profile) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.menu_favorites) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.menu_news){
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.menu_settings) {
+            ft.replace(R.id.fragments, new FragmentSettings());
+            ft.commit();
+        } else if (id == R.id.menu_exit) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.menu_share){
 
+        } else if (id == R.id.menu_history){
+            ft.replace(R.id.fragments, new FragmentHistory());
+            ft.commit();
         } else if (id == R.id.navigation_mycards) {
             ft.replace(R.id.fragments, new FragmentCards());
             ft.commit();
@@ -191,6 +193,9 @@ public class activity_home extends AppCompatActivity
         } else if (id == R.id.navigation_home){
             ft.replace(R.id.fragments, new FragmentMainCard());
             ft.commit();
+        } else if (id == R.id.hce_request){
+            Intent intent = new Intent(this, HCERequestActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

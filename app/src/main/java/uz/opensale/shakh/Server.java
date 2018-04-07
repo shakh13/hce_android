@@ -17,7 +17,8 @@ import java.util.Map;
 
 public class Server {
 
-    private String server = "http://192.168.1.130/hce/backend/web/?r=api/";
+    private String server_ips[] = {"192.168.43.229", "192.168.1.130"};
+    private String server = "http://"+server_ips[1]+"/hce/backend/web/?r=api/";
     private Context context;
     public String response;
 
@@ -42,7 +43,7 @@ public class Server {
         this.listener = listener;
     }
 
-    public void request(String url, final Map<String, String> params, int method){
+    private void request(String url, final Map<String, String> params, int method){
         RequestQueue queue = Volley.newRequestQueue(context);
 
         StringRequest stringRequest = new StringRequest(method, server+url, new Response.Listener<String>() {
@@ -69,7 +70,7 @@ public class Server {
         queue.add(stringRequest);
     }
 
-    public void request(String url, Map<String, String> params){
+    private void request(String url, Map<String, String> params){
         request(url, params, 1);
     }
 

@@ -5,38 +5,68 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
-            android:id="@+id/show_secure"
-            android:icon="@drawable/ic_menu_camera"
-            android:enabled="true"
-            android:visible="true"
-            app:actionLayout="@layout/show_secure"
-            android:title="Import" />
+            android:id="@+id/menu_home"
+            android:icon="@drawable/ic_home_black_18dp"
+            android:title="Домашная страница"
+            tools:ignore="HardcodedText" />
+
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/menu_profile"
+            android:icon="@drawable/ic_perm_identity_black_18dp"
+            android:title="Профиль"
+            tools:ignore="HardcodedText" />
+
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/menu_news"
+            android:icon="@drawable/ic_subscriptions_black_18dp"
+            android:title="Новости"
+            android:visible="false"
+            tools:ignore="HardcodedText" />
+
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/menu_favorites"
+            android:icon="@drawable/ic_favorite_border_black_18dp"
+            android:title="Избранные"
+            android:visible="false"
+            tools:ignore="HardcodedText" />
+
+        <item
+            android:id="@+id/menu_history"
+            android:icon="@drawable/ic_schedule_black_18dp"
+            android:title="История"
+            tools:ignore="HardcodedText" />
+
+
+        <item
+            android:id="@+id/hce_request"
+            android:icon="@drawable/ic_home_black_18dp"
+            android:title="HCE Request"
+            tools:ignore="HardcodedText" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Коммуникация"
+        tools:ignore="HardcodedText">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/menu_settings"
+                android:icon="@drawable/ic_settings_black_18dp"
+                android:title="Настройки" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/menu_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Поделиться" />
         </menu>
     </item>
+
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/menu_exit"
+            android:icon="@drawable/ic_power_settings_new_black_18dp"
+            android:title="Выход"
+            tools:ignore="HardcodedText" />
+    </group>
 
 </menu>

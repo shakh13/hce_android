@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Shakh</string>
+    <string name="app_name">HCE</string>
     <string name="title_activity_login">Авторизация</string>
     <string name="title_activity_signup">Регистрация</string>
 
@@ -35,11 +35,15 @@
 
     <string name="action_settings">Settings</string>
     <string name="textview">TextView</string>
-    <string name="title_activity_home">HCE</string>
 
     <string name="servicedesc">HCE.UZ</string>
     <string name="aiddescription">hce.uz</string>
     <string name="nameTxt">Name</string>
     <string name="saveTxt">Save</string>
     <string name="_8942">⋮</string>
+    <string name="settings">Настройки</string>
+
+    <string name="title_activity_hcerequest">Request</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">OOO Shaxzod Saidmurodov requestion\n100.000 UZS\nDo you accept this request?</string>
 </resources>
