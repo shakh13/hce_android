@@ -46,4 +46,8 @@
     <string name="title_activity_hcerequest">Request</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">OOO Shaxzod Saidmurodov requestion\n100.000 UZS\nDo you accept this request?</string>
+    <string name="nitify_melody">Мелодия уведомления</string>
+    <string name="settings_volume">Гроскость</string>
+    <string name="settings_vibration">Выбрация</string>
+    <string name="notification">Уведомление</string>
 </resources>
