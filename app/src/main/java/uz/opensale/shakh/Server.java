@@ -43,12 +43,15 @@ public class Server {
         this.listener = listener;
     }
 
-    private void request(String url, final Map<String, String> params, int method){
+    private int i = 0;
+
+    private void request(String url, final Map<String, String> params, int method, String server){
         RequestQueue queue = Volley.newRequestQueue(context);
 
         StringRequest stringRequest = new StringRequest(method, server+url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String resp) {
+                    i = 0;
                     if (listener != null)
                         listener.OnResponse(resp);
                 }
@@ -56,8 +59,13 @@ public class Server {
             new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    if (listener != null)
+                    if (listener != null) {
+                        if (i < 10){
+                            request(url, params, method, "http://"+server_ips[i%2]+"/hce/backend/web/?r=api/");
+                            i++;
+                        }
                         listener.OnError(error.toString());
+                    }
                 }
             }
         ){
@@ -71,10 +79,10 @@ public class Server {
     }
 
     private void request(String url, Map<String, String> params){
-        request(url, params, 1);
+        request(url, params, 1, this.server);
     }
 
     public void requestGET(String url, Map<String, String> params){
-        request(url, params, 0);
+        request(url, params, 0, this.server);
     }
 }
