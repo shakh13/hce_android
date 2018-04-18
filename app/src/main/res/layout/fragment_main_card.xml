@@ -29,10 +29,8 @@
                     android:id="@+id/main_card_name"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/dp24"
-                    android:text="Shakhzod Saidmurodov"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:ignore="HardcodedText,SpUsage" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/main_card_num"

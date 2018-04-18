@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class Server {
 
-    private String server_ips[] = {"192.168.43.229", "192.168.1.130"};
+    private String server_ips[] = {"192.168.1.130", "192.168.43.229"};
     private String server = "http://"+server_ips[1]+"/hce/backend/web/?r=api/";
     private Context context;
     public String response;
