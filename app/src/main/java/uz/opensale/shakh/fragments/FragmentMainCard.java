@@ -2,12 +2,14 @@ package uz.opensale.shakh.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ import uz.opensale.shakh.LoginActivity;
 import uz.opensale.shakh.R;
 import uz.opensale.shakh.Server;
 import uz.opensale.shakh.activity_home;
+import uz.opensale.shakh.models.Cards;
 import uz.opensale.shakh.models.User;
 
 /**
@@ -39,6 +42,9 @@ public class FragmentMainCard extends Fragment {
 
     ImageView nfc_service_toggler;
     TextView main_card_name;
+    TextView main_card_num;
+    TextView main_card_balance;
+    TextView main_card_expdate;
 
     public SharedPreferences pref;
     public SharedPreferences.Editor editor;
@@ -53,6 +59,9 @@ public class FragmentMainCard extends Fragment {
         realm = Realm.getDefaultInstance();
 
         main_card_name = view.findViewById(R.id.main_card_name);
+        main_card_num = view.findViewById(R.id.main_card_num);
+        main_card_balance = view.findViewById(R.id.main_card_balance);
+        main_card_expdate = view.findViewById(R.id.main_card_expdate);
 
 
         pref = (SharedPreferences) view.getContext().getSharedPreferences("ssh13", 0);
@@ -67,31 +76,48 @@ public class FragmentMainCard extends Fragment {
             Map<String, String> params = new HashMap<>();
             params.put("auth_key", pref.getString("auth_key", null));
 
-            Server server = new Server(activity_home.getContext(), "getmaincard", params);
+            final ProgressDialog progressDialog = new ProgressDialog(activity_home.getContext());
+            progressDialog.setMessage("Загружается...");
+            progressDialog.show();
+
+            Server server = new Server(activity_home.getContext(), "auth/getmaincard", params);
 
             server.setListener(new Server.ServerListener() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void OnResponse(String data) {
                     try{
+                        progressDialog.dismiss();
                         JSONObject jsonObject = new JSONObject(data);
                         if (jsonObject.getBoolean("status")){
                             JSONObject obj = jsonObject.getJSONObject("content");
 
                             main_card_name.setText(obj.getString("name"));
+                            main_card_num.setText(obj.getString("cnumb"));
+                            main_card_balance.setText(obj.getString("cash") + " UZS");
+                            main_card_expdate.setText("Действителен до " + obj.getString("exp_date"));
+
+                            Cards card = new Cards(obj.getInt("id"), obj.getInt("bank_id"), obj.getString("bank_name"), obj.getString("cnumb"), obj.getString("exp_date"), obj.getString("phone"), obj.getString("name"), obj.getString("key"), obj.getInt("cash"));
+                            nfc_service_toggler.setVisibility(View.VISIBLE);
+                            activity_home.setMaincard(card);
                         }
                         else {
                             // print content
+                            nfc_service_toggler.setVisibility(View.INVISIBLE);
                             Toast.makeText(activity_home.getContext(), jsonObject.getString("content"), Toast.LENGTH_LONG).show();
+
                         }
                     } catch (JSONException e) {
-                        Toast.makeText(activity_home.getContext(), e.toString(), Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
+                        nfc_service_toggler.setVisibility(View.INVISIBLE);
+                        Log.i("HCE", e.toString());
+                         e.printStackTrace();
                     }
                 }
 
                 @Override
                 public void OnError(String error) {
-                    Toast.makeText(activity_home.getContext(), error, Toast.LENGTH_LONG).show();
+                    nfc_service_toggler.setVisibility(View.INVISIBLE);
+                    Log.i("HCE", error);
                 }
             });
 

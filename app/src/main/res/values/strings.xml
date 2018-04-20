@@ -40,7 +40,6 @@
     <string name="aiddescription">hce.uz</string>
     <string name="nameTxt">Name</string>
     <string name="saveTxt">Save</string>
-    <string name="_8942">⋮</string>
     <string name="settings">Настройки</string>
 
     <string name="title_activity_hcerequest">Request</string>
@@ -50,4 +49,9 @@
     <string name="settings_volume">Гроскость</string>
     <string name="settings_vibration">Выбрация</string>
     <string name="notification">Уведомление</string>
+    <string name="card_number">Card_number</string>
+    <string name="card_cash">Card_cash</string>
+    <string name="_8942">⋮</string>
+    <string name="card_name">Card_name</string>
+    <string name="card_expdate">Card_expdate</string>
 </resources>

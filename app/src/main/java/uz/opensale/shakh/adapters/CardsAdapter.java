@@ -1,12 +1,20 @@
 package uz.opensale.shakh.adapters;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,14 +65,35 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
         holder.name.setText(card.getName());
         holder.cash.setText(String.valueOf(card.getCash()) + " UZS");
         holder.number.setText(card.getNumber());
-        holder.expdate.setText("Срок годности: " + card.getExp_date());
+        holder.expdate.setText("Срок: " + card.getExp_date());
 
-        holder.card_item.setOnClickListener(new View.OnClickListener() {
+        holder.card_contextMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(context, holder.card_contextMenu);
+                popup.inflate(R.menu.card_menu);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+                            case R.id.card_menu_activate:
+                                Toast.makeText(context, "Activate", Toast.LENGTH_LONG).show();
+                        }
+
+                        return false;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+
+       /* holder.card_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, String.valueOf(card.getId()), Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
     }
 
     public Context getContext() {
@@ -83,6 +112,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
         public TextView number;
         TextView expdate;
         LinearLayout card_item;
+        TextView card_contextMenu;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -92,6 +122,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
             number = (TextView) itemView.findViewById(R.id.card_number);
             expdate = (TextView) itemView.findViewById(R.id.card_expdate);
             card_item = (LinearLayout) itemView.findViewById(R.id.card_item);
+            card_contextMenu = itemView.findViewById(R.id.card_contextMenu);
         }
+
+
     }
 }

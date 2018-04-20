@@ -34,13 +34,11 @@
 
                 <TextView
                     android:id="@+id/main_card_num"
-                    android:text="8600 3129 6976 5276"
                     android:textSize="@dimen/dp32"
                     android:textAlignment="center"
                     android:textColor="@color/colorWhite"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:ignore="HardcodedText,SpUsage" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/main_card_balance"
@@ -49,19 +47,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="313.000 UZS"
                     android:textColor="@color/colorWhite"
-                    android:paddingBottom="@dimen/dp16"
-                    tools:ignore="HardcodedText,SpUsage" />
+                    android:paddingBottom="@dimen/dp16" />
 
                 <TextView
+                    android:id="@+id/main_card_expdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="viewEnd"
-                    android:text="Действует до 12/19"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/dp16"
-                    tools:ignore="HardcodedText,SpUsage" />
+                    android:textSize="@dimen/dp16" />
 
             </LinearLayout>
 
@@ -85,6 +80,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/logo0disabled"
+
+                android:visibility="invisible"
 
                 tools:ignore="ContentDescription" />
 

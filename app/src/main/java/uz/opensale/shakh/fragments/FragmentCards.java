@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +77,7 @@ public class FragmentCards extends Fragment {
     public void loadCards(){
 
         final ProgressDialog progressDialog = new ProgressDialog(activity_home.getContext());
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage("Загружается...");
         progressDialog.show();
 
 
@@ -119,22 +120,24 @@ public class FragmentCards extends Fragment {
                                 );
                                 cardsList.add(card);
                             }
-                            adapter = new CardsAdapter(cardsList, context);
-                            recyclerView.setAdapter(adapter);
+
+                            recyclerView.setAdapter(new CardsAdapter(cardsList, context));
                         }
                         else {
                             /////
+                            Toast.makeText(activity_home.getContext(), jsonObject.getString("content"), Toast.LENGTH_LONG).show();
                         }
 
                     }
                     catch (JSONException e){
+                        Log.e("HCE", e.toString());
                         e.printStackTrace();
                     }
                 }
 
                 @Override
                 public void OnError(String error) {
-                    Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
+                    Log.i("HCE", error);
                 }
             });
         }

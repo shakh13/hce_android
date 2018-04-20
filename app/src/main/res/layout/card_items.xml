@@ -16,44 +16,66 @@
                 android:orientation="vertical"
                 android:padding="@dimen/dp10"
                 android:background="@drawable/cards_example_mag">
-                <TextView
-                    android:id="@+id/card_number"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Card_number"
-                    android:textSize="20dp"
-                    android:layout_marginTop="22dp"
-                    android:textColor="@color/cardview_light_background"
-                    tools:text="Card number" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/card_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/card_number"
+                        android:textSize="20sp"
+                        android:layout_marginTop="22dp"
+                        android:textColor="@color/cardview_light_background"
+                        tools:text="Card number" />
+
+                    <TextView
+                        android:id="@+id/card_contextMenu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:paddingStart="26sp"
+                        android:paddingTop="26sp"
+                        android:text="@string/_8942"
+                        android:textColor="@color/colorWhite"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        tools:ignore="RelativeOverlap,RtlSymmetry" />
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/card_cash"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Card_cash"
+                    android:text="@string/card_cash"
                     android:textAlignment="viewEnd"
-                    android:textSize="32dp"
-                    android:layout_marginRight="@dimen/dp10"
+                    android:textSize="32sp"
+                    android:layout_marginEnd="@dimen/dp10"
                     android:layout_marginTop="@dimen/dp10"
                     tools:text="CASH $"/>
+
                 <TextView
                     android:id="@+id/card_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Card_name"
-                    android:textSize="26dp"
+                    android:text="@string/card_name"
+                    android:textSize="26sp"
                     android:layout_marginLeft="@dimen/dp10"
                     android:layout_marginRight="@dimen/dp10"
                     tools:text="Name"/>
+
                 <TextView
                     android:id="@+id/card_expdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Card_expdate"
+                    android:text="@string/card_expdate"
                     android:textAlignment="textEnd"
                     android:layout_margin="5dp"
-                    android:paddingRight="@dimen/dp10"
+                    android:paddingEnd="@dimen/dp10"
 
-                    tools:text="Exp Date"/>
+                    tools:text="Exp Date"
+                    tools:ignore="RtlSymmetry" />
             </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

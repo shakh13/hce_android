@@ -30,6 +30,7 @@ import uz.opensale.shakh.fragments.FragmentCards;
 import uz.opensale.shakh.fragments.FragmentHistory;
 import uz.opensale.shakh.fragments.FragmentMainCard;
 import uz.opensale.shakh.fragments.FragmentSettings;
+import uz.opensale.shakh.models.Cards;
 
 public class activity_home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnNavigationItemSelectedListener {
@@ -43,6 +44,10 @@ public class activity_home extends AppCompatActivity
 
     public SharedPreferences pref;
     public SharedPreferences.Editor editor;
+
+    static Cards main_card;
+
+
 
     @SuppressLint({"CommitPrefEdits", "SetTextI18n", "CommitTransaction", "ResourceAsColor"})
     @Override
@@ -93,6 +98,16 @@ public class activity_home extends AppCompatActivity
 
         getFragmentManager().beginTransaction().replace(R.id.fragments, new FragmentMainCard()).commit();
 
+        main_card = null;
+
+    }
+
+    public static void setMaincard(Cards card){
+        main_card = card;
+    }
+
+    public static Cards getMaincard(){
+        return main_card;
     }
 
     @Override
