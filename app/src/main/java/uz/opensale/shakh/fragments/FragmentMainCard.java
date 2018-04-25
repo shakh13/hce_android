@@ -91,6 +91,7 @@ public class FragmentMainCard extends Fragment {
                         JSONObject jsonObject = new JSONObject(data);
                         if (jsonObject.getBoolean("status")){
                             JSONObject obj = jsonObject.getJSONObject("content");
+                            //pl
 
                             main_card_name.setText(obj.getString("name"));
                             main_card_num.setText(obj.getString("cnumb"));
