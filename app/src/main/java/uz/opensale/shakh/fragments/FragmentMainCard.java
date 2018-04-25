@@ -77,10 +77,10 @@ public class FragmentMainCard extends Fragment {
             params.put("auth_key", pref.getString("auth_key", null));
 
             final ProgressDialog progressDialog = new ProgressDialog(activity_home.getContext());
-            progressDialog.setMessage("Загружается...");
+            progressDialog.setMessage("Loading...");
             progressDialog.show();
 
-            Server server = new Server(activity_home.getContext(), "auth/getmaincard", params);
+            Server server = new Server(activity_home.getContext(), "cards/getmaincard", params);
 
             server.setListener(new Server.ServerListener() {
                 @SuppressLint("SetTextI18n")

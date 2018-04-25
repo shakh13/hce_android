@@ -42,6 +42,8 @@ public class activity_home extends AppCompatActivity
     Realm realm;
     CheckUser checkUser;
 
+    public static BottomNavigationView bottomNavigationView;
+
     public SharedPreferences pref;
     public SharedPreferences.Editor editor;
 
@@ -71,7 +73,7 @@ public class activity_home extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this); // Navigation view listener init
 
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation); // Bottom Navigation View init
+        bottomNavigationView = findViewById(R.id.navigation); // Bottom Navigation View init
         bottomNavigationView.setOnNavigationItemSelectedListener(this); // Bottom navigation view listener init
 
 

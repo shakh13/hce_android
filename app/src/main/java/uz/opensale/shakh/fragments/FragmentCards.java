@@ -77,7 +77,7 @@ public class FragmentCards extends Fragment {
     public void loadCards(){
 
         final ProgressDialog progressDialog = new ProgressDialog(activity_home.getContext());
-        progressDialog.setMessage("Загружается...");
+        progressDialog.setMessage("Loading...");
         progressDialog.show();
 
 
@@ -92,7 +92,7 @@ public class FragmentCards extends Fragment {
 
             cardsList.clear();
 
-            Server server = new Server(context,"auth/getcards", params);
+            Server server = new Server(context,"cards/getcards", params);
             server.setListener(new Server.ServerListener() {
                 @Override
                 public void OnResponse(String data) {

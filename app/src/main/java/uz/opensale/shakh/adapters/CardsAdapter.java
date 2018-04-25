@@ -2,10 +2,16 @@ package uz.opensale.shakh.adapters;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,9 +24,17 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import uz.opensale.shakh.R;
+import uz.opensale.shakh.Server;
+import uz.opensale.shakh.activity_home;
+import uz.opensale.shakh.fragments.FragmentMainCard;
 import uz.opensale.shakh.models.Cards;
 
 /**
@@ -40,6 +54,9 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
     private List<Cards> cardsList;
     private Context context;
 
+    public SharedPreferences pref;
+    public SharedPreferences.Editor editor;
+
     public CardsAdapter(List<Cards> cardsList, Context context){
         this.cardsList = cardsList;
         this.context = context;
@@ -50,10 +67,14 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
         return cardsList.size();
     }
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_items, parent, false);
+
+        pref = (SharedPreferences) context.getSharedPreferences("ssh13", 0);
+        editor = (SharedPreferences.Editor) pref.edit();
 
         return new ViewHolder(v);
     }
@@ -77,7 +98,45 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()){
                             case R.id.card_menu_activate:
-                                Toast.makeText(context, "Activate", Toast.LENGTH_LONG).show();
+
+                                final ProgressDialog progressDialog = new ProgressDialog(activity_home.getContext());
+                                progressDialog.setMessage("Wait...");
+                                progressDialog.show();
+
+                                Map<String, String> params = new HashMap<String, String>();
+                                params.put("auth_key", pref.getString("auth_key", null));
+                                params.put("card_id", String.valueOf(card.getId()));
+
+                                Server server = new Server(context,"cards/setmaincard", params);
+                                server.setListener(new Server.ServerListener() {
+                                    @Override
+                                    public void OnResponse(String data) {
+                                        progressDialog.dismiss();
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getBoolean("status")){
+                                                activity_home.bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+                                                FragmentManager fm = ((Activity) context).getFragmentManager();
+                                                FragmentTransaction ft = fm.beginTransaction();
+                                                ft.replace(R.id.fragments, new FragmentMainCard());
+                                                ft.commit();
+                                            }
+                                            else {
+                                                Toast.makeText(context, jsonObject.getString("content"), Toast.LENGTH_LONG).show();
+                                            }
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void OnError(String error) {
+                                        progressDialog.dismiss();
+                                        Log.i("HCE", error);
+                                    }
+                                });
+
                         }
 
                         return false;
