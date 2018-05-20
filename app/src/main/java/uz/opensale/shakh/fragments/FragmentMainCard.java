@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +55,19 @@ public class FragmentMainCard extends Fragment {
     @SuppressLint("CommitPrefEdits")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
+        String a = "Shakh";
+        byte[] c = a.getBytes(); // String to byte array
+
+        byte[] b = {
+                (byte) 0x01
+        };
+
+        String s = new String(b);
+
+        Log.i("HCE", s);
+
+
         View view = inflater.inflate(R.layout.fragment_main_card, container, false);
 
         realm = Realm.getDefaultInstance();
@@ -96,7 +110,7 @@ public class FragmentMainCard extends Fragment {
                             main_card_name.setText(obj.getString("name"));
                             main_card_num.setText(obj.getString("cnumb"));
                             main_card_balance.setText(obj.getString("cash") + " UZS");
-                            main_card_expdate.setText("Действителен до " + obj.getString("exp_date"));
+                            main_card_expdate.setText("Expiry date: " + obj.getString("exp_date"));
 
                             Cards card = new Cards(obj.getInt("id"), obj.getInt("bank_id"), obj.getString("bank_name"), obj.getString("cnumb"), obj.getString("exp_date"), obj.getString("phone"), obj.getString("name"), obj.getString("key"), obj.getInt("cash"));
                             nfc_service_toggler.setVisibility(View.VISIBLE);
@@ -128,11 +142,6 @@ public class FragmentMainCard extends Fragment {
             startActivity(intent);
         }
 
-
-
-
-
-
         nfc_service_toggler = view.findViewById(R.id.nfc_service_toggler);
         nfc_service_toggler.setImageResource(activity_home.HCE_ENABLED ? R.drawable.logo0 : R.drawable.logo0disabled);
 
@@ -144,7 +153,7 @@ public class FragmentMainCard extends Fragment {
                 nfc_service_toggler.setImageResource(activity_home.HCE_ENABLED ? R.drawable.logo0disabled : R.drawable.logo0);
                 activity_home.HCE_ENABLED = !activity_home.HCE_ENABLED;
 
-                Toast.makeText(getContext(), activity_home.HCE_ENABLED ? "Включено" : "Выключено", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), activity_home.HCE_ENABLED ? "Turned on" : "Turned off", Toast.LENGTH_SHORT).show();
             }
         });
 

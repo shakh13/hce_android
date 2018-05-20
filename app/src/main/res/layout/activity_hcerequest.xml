@@ -64,12 +64,13 @@
             tools:ignore="HardcodedText,SpUsage" />
 
         <TextView
+            android:id="@+id/hce_request_cancel_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="CANCEL"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
-            android:text="CANCEL"
             tools:ignore="HardcodedText" />
 
     </LinearLayout>
