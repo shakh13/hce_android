@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.app.Activity;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.List;
@@ -29,14 +30,27 @@ public class HCEService extends HostApduService {
 
     private Cards active_card = activity_home.getMaincard();
 
+    private byte[] getWelcomeMessage(){
+        return "Hello Terminal".getBytes();
+    }
 
     @SuppressLint("NewApi")
     public byte[] processCommandApdu(byte[] bytes, Bundle bundle) {
         byte[] a = {};
 
+        if (selectAID(bytes)){
+            Log.i("HCE", "Application selected");
+            return getWelcomeMessage();
+        }
+        else {
+            Log.i("HCE", "Received: " + new String(bytes));
+            // continue............................
+        }
+/*
         Intent intent = new Intent(this, HCERequestActivity.class);
+        intent.putExtra("bytes", bytes);
         startActivity(intent);
-
+*/
         // bytes[0] -> command
 
         /*
@@ -47,9 +61,7 @@ public class HCEService extends HostApduService {
             0x03 -> // something ...
 
          */
-        Intent inte = new Intent(this, HCERequestActivity.class);
-        inte.putExtra("bytes", bytes);
-
+/*
         switch (bytes[0]){
             case 0x00:
                 // I'm terminal
@@ -74,7 +86,7 @@ public class HCEService extends HostApduService {
                 Toast.makeText(activity_home.getContext(), "This is not trusted teminal. Please, remove your phone from this device.", Toast.LENGTH_LONG).show();
                 break;
         }
-
+*/
         return a;
     }
 
@@ -82,6 +94,11 @@ public class HCEService extends HostApduService {
     public void onDeactivated(int i) {
 
     }
+
+    private boolean selectAID(byte[] apdu){
+        return apdu.length > 2 && apdu[0] == (byte)0 && apdu[1] == (byte) 0xa4;
+    }
+
 
     public boolean isForeground(String PackageName){
         ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
@@ -91,14 +108,5 @@ public class HCEService extends HostApduService {
         ComponentName componentInfo = task.get(0).topActivity;
 
         return componentInfo.getPackageName().equals(PackageName);
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId){
-        if (intent.getExtras() != null){
-            String massage = intent.getExtras().getString("message");
-        }
-
-        return START_NOT_STICKY;
     }
 }

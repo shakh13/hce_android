@@ -1,6 +1,7 @@
 package uz.opensale.shakh;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +9,10 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
@@ -104,6 +108,13 @@ public class HCERequestActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "Click", LENGTH_SHORT).show();
             }
         });
+
+        Intent intent = getIntent();
+        byte bytes[];
+        bytes = intent.getByteArrayExtra("bytes");
+        String s = new String(bytes);
+        TextView hce_request_uzs = findViewById(R.id.hce_request_uzs);
+        hce_request_uzs.setText(s);
 
 
         // Set up the user interaction to manually show or hide the system UI.

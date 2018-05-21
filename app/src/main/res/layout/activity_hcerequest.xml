@@ -38,13 +38,15 @@
             android:textSize="28sp"
             android:text="REQUESTING:"
             tools:ignore="HardcodedText" />
+
         <TextView
+            android:id="@+id/hce_request_uzs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="100.000 UZS"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="42sp"
-            android:text="100.000 UZS"
             tools:ignore="HardcodedText" />
 
         <Button
