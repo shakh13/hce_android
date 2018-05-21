@@ -58,6 +58,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_hcerequest"
             android:theme="@style/FullscreenTheme"></activity>
+        <activity android:name=".services.HCEService" />
     </application>
 
 </manifest>

@@ -4,19 +4,18 @@ import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.cardemulation.HostApduService;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.app.Activity;
 import android.util.Log;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import java.util.List;
 
 import uz.opensale.shakh.HCERequestActivity;
-import uz.opensale.shakh.R;
 import uz.opensale.shakh.activity_home;
 import uz.opensale.shakh.models.Cards;
 
@@ -44,6 +43,17 @@ public class HCEService extends HostApduService {
         }
         else {
             Log.i("HCE", "Received: " + new String(bytes));
+
+            promptForResult(new PromptRunnable() {
+                @Override
+                public void run() {
+                    super.run();
+                    String value = this.getValue();
+                    Intent i = new Intent(getApplication(), HCERequestActivity.class);
+                    i.putExtra("extraValue", value);
+                    startActivity(i);
+                }
+            });
             // continue............................
         }
 /*
@@ -108,5 +118,53 @@ public class HCEService extends HostApduService {
         ComponentName componentInfo = task.get(0).topActivity;
 
         return componentInfo.getPackageName().equals(PackageName);
+    }
+
+    private void promptForResult(final PromptRunnable postrun){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Request");
+        alert.setMessage("Requesting xxx.xx UZS");
+        final EditText input = new EditText(this);
+        alert.setView(input);
+
+        alert.setPositiveButton("PAY", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String value = input.getText().toString();
+                dialogInterface.dismiss();
+
+                postrun.setValue(value);
+                postrun.run();
+                return;
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                return;
+            }
+        });
+
+        alert.show();
+    }
+
+    private class PromptRunnable implements Runnable{
+
+        private String v;
+
+        void setValue(String inv){
+            this.v = inv;
+        }
+
+        String getValue(){
+            return this.v;
+        }
+
+        @Override
+        public void run() {
+            this.run();
+        }
     }
 }
