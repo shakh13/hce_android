@@ -3,6 +3,7 @@ package uz.opensale.shakh.services;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,8 +12,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.EditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Arrays;
 import java.util.List;
 
 import uz.opensale.shakh.HCERequestActivity;
@@ -23,9 +29,14 @@ import uz.opensale.shakh.models.Cards;
  * Created by shakh on 12.01.18.
  */
 
+@SuppressLint("Registered")
 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class HCEService extends HostApduService {
     @RequiresApi(api = Build.VERSION_CODES.N)
+
+    byte[] prev_bytes = null;
+    byte[] return_ok = "ok".getBytes();
+    byte[] repeat_request = "repeat".getBytes();
 
     private Cards active_card = activity_home.getMaincard();
 
@@ -35,33 +46,6 @@ public class HCEService extends HostApduService {
 
     @SuppressLint("NewApi")
     public byte[] processCommandApdu(byte[] bytes, Bundle bundle) {
-        byte[] a = {};
-
-        if (selectAID(bytes)){
-            Log.i("HCE", "Application selected");
-            return getWelcomeMessage();
-        }
-        else {
-            Log.i("HCE", "Received: " + new String(bytes));
-
-            promptForResult(new PromptRunnable() {
-                @Override
-                public void run() {
-                    super.run();
-                    String value = this.getValue();
-                    Intent i = new Intent(getApplication(), HCERequestActivity.class);
-                    i.putExtra("extraValue", value);
-                    startActivity(i);
-                }
-            });
-            // continue............................
-        }
-/*
-        Intent intent = new Intent(this, HCERequestActivity.class);
-        intent.putExtra("bytes", bytes);
-        startActivity(intent);
-*/
-        // bytes[0] -> command
 
         /*
             -- Commands --
@@ -71,32 +55,71 @@ public class HCEService extends HostApduService {
             0x03 -> // something ...
 
          */
-/*
-        switch (bytes[0]){
-            case 0x00:
-                // I'm terminal
-                Intent in = new Intent(this, HCERequestActivity.class);
-                in.putExtra("terminal", bytes.toString());
-                startActivity(in);
-                break;
-            case 0x01:
-                // I need xxx.xxx uzs
-                double uzs = Integer.valueOf(String.valueOf(bytes[1]))*100 + Integer.valueOf(String.valueOf(bytes[2]))*10 + Integer.valueOf(String.valueOf(bytes[3])) + Integer.valueOf(String.valueOf(bytes[5]))/10 + Integer.valueOf(String.valueOf(bytes[6]))/100 + Integer.valueOf(String.valueOf(bytes[7]))/1000;
-                Toast.makeText(activity_home.getContext(), "Need " + String.valueOf(uzs), Toast.LENGTH_SHORT).show();
-                break;
-            case 0x02:
 
-                break;
+        byte[] a = {};
 
-            case 0x03:
-
-                break;
-
-            default:
-                Toast.makeText(activity_home.getContext(), "This is not trusted teminal. Please, remove your phone from this device.", Toast.LENGTH_LONG).show();
-                break;
+        if (selectAID(bytes)){
+            Log.i("HCE", "Application selected");
+            return getWelcomeMessage();
         }
-*/
+        else {
+
+            if (Arrays.equals(bytes, prev_bytes)){ //
+                // repeat question
+
+                if (activity_home.HCE_REQUEST_ALLOW == -1){
+                    return repeat_request;
+                }
+                else {
+                    activity_home.HCE_CURRENT_TERMINAL_NAME = "";
+                    activity_home.HCE_CURRENT_TERMINAL_ID = 0;
+                    activity_home.HCE_REQUEST_ALLOW = -1;
+
+                    prev_bytes = null;
+
+                    return (activity_home.HCE_REQUEST_ALLOW == 1 ? "yes" : "no").getBytes();
+                }
+            }
+            else {
+                prev_bytes = bytes;
+
+                String json_string = Arrays.toString(bytes);
+                try {
+                    JSONObject json = new JSONObject(json_string);
+                    if (json_string == "ok"){
+                        // activity_main reload main_card_fragment
+
+                    }
+                    else {
+
+                        if (json.getInt("c") == 0) { // c -> command
+                            // I'm terminal
+                            activity_home.HCE_CURRENT_TERMINAL_ID = json.getInt("t");
+                            activity_home.HCE_CURRENT_TERMINAL_NAME = json.getString("n");
+                            return return_ok;
+                        }
+                        else if (json.getInt("c") == 1) {
+                            // I need xxx UZS
+                            double s = json.getDouble("s");
+                            Intent intent = new Intent(activity_home.getContext(), HCERequestActivity.class);
+                            intent.putExtra("sum", s);
+                            intent.putExtra("terminal_name", activity_home.HCE_CURRENT_TERMINAL_NAME);
+                            intent.putExtra("terminal_id", activity_home.HCE_CURRENT_TERMINAL_ID);
+                            startActivity(intent);
+                            return repeat_request;
+                        }
+                        else if (json.getInt("c") == 2){
+                            // check balance
+                            //......................................................................
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         return a;
     }
 
@@ -118,53 +141,5 @@ public class HCEService extends HostApduService {
         ComponentName componentInfo = task.get(0).topActivity;
 
         return componentInfo.getPackageName().equals(PackageName);
-    }
-
-    private void promptForResult(final PromptRunnable postrun){
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Request");
-        alert.setMessage("Requesting xxx.xx UZS");
-        final EditText input = new EditText(this);
-        alert.setView(input);
-
-        alert.setPositiveButton("PAY", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String value = input.getText().toString();
-                dialogInterface.dismiss();
-
-                postrun.setValue(value);
-                postrun.run();
-                return;
-            }
-        });
-
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                return;
-            }
-        });
-
-        alert.show();
-    }
-
-    private class PromptRunnable implements Runnable{
-
-        private String v;
-
-        void setValue(String inv){
-            this.v = inv;
-        }
-
-        String getValue(){
-            return this.v;
-        }
-
-        @Override
-        public void run() {
-            this.run();
-        }
     }
 }

@@ -1,9 +1,11 @@
 package uz.opensale.shakh;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -21,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -31,23 +34,30 @@ import uz.opensale.shakh.fragments.FragmentHistory;
 import uz.opensale.shakh.fragments.FragmentMainCard;
 import uz.opensale.shakh.fragments.FragmentSettings;
 import uz.opensale.shakh.models.Cards;
+import uz.opensale.shakh.services.HCEService;
 
 public class activity_home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnNavigationItemSelectedListener {
 
     public static boolean HCE_ENABLED = false;
+    public static boolean HCE_REQUEST_WAIT = false;
+    public static int HCE_REQUEST_ALLOW = -1;
+    public static int HCE_CURRENT_TERMINAL_ID = 0;
+    public static String HCE_CURRENT_TERMINAL_NAME = "";
 
     @SuppressLint("StaticFieldLeak")
     private static Context context;
     Realm realm;
     CheckUser checkUser;
 
+    @SuppressLint("StaticFieldLeak")
     public static BottomNavigationView bottomNavigationView;
 
     public SharedPreferences pref;
     public SharedPreferences.Editor editor;
 
     static Cards main_card;
+
 
 
 
@@ -101,6 +111,8 @@ public class activity_home extends AppCompatActivity
         getFragmentManager().beginTransaction().replace(R.id.fragments, new FragmentMainCard()).commit();
 
         main_card = null;
+
+
 
     }
 

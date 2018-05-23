@@ -109,13 +109,6 @@ public class HCERequestActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        byte bytes[];
-        bytes = intent.getByteArrayExtra("bytes");
-        String s = new String(bytes);
-        TextView hce_request_uzs = findViewById(R.id.hce_request_uzs);
-        hce_request_uzs.setText(s);
-
 
         // Set up the user interaction to manually show or hide the system UI.
         // Upon interacting with UI controls, delay any scheduled hide()
