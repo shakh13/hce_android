@@ -14,6 +14,7 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +47,7 @@ public class HCEService extends HostApduService {
 
     @SuppressLint("NewApi")
     public byte[] processCommandApdu(byte[] bytes, Bundle bundle) {
+
 
         /*
             -- Commands --
@@ -83,7 +85,11 @@ public class HCEService extends HostApduService {
             else {
                 prev_bytes = bytes;
 
-                String json_string = Arrays.toString(bytes);
+                String json_string = new String(bytes);
+                json_string = json_string.substring(0, json_string.length() - 1);
+                Log.i("HCE_REQUEST", activity_home.getMaincard().getKey());
+                Log.i("HCE_REQUEST", json_string);
+
                 try {
                     JSONObject json = new JSONObject(json_string);
                     if (json_string == "ok"){
@@ -96,7 +102,8 @@ public class HCEService extends HostApduService {
                             // I'm terminal
                             activity_home.HCE_CURRENT_TERMINAL_ID = json.getInt("t");
                             activity_home.HCE_CURRENT_TERMINAL_NAME = json.getString("n");
-                            return return_ok;
+                            Log.i("request", new String(activity_home.getMaincard().getKey().getBytes()));
+                            return activity_home.getMaincard().getKey().getBytes();
                         }
                         else if (json.getInt("c") == 1) {
                             // I need xxx UZS

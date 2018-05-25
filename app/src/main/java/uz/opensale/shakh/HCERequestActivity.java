@@ -105,9 +105,20 @@ public class HCERequestActivity extends AppCompatActivity {
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Click", LENGTH_SHORT).show();
+                activity_home.HCE_REQUEST_ALLOW = 1;
+                finish();
             }
         });
+
+        TextView btnCalcel = findViewById(R.id.hce_request_cancel_btn);
+        btnCalcel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity_home.HCE_REQUEST_ALLOW = 0;
+                finish();
+            }
+        });
+
 
 
         // Set up the user interaction to manually show or hide the system UI.
