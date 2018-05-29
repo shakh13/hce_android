@@ -97,6 +97,14 @@ public class HCERequestActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_hcerequest);
 
+        /*Intent intent = getIntent();
+
+        TextView hce_request_terminal_name = findViewById(R.id.hce_request_terminal_name);
+        hce_request_terminal_name.setText(intent.getStringExtra("terminal_name"));
+
+        TextView hce_request_uzs = findViewById(R.id.hce_request_uzs);
+        hce_request_uzs.setText(String.valueOf(intent.getDoubleExtra("sum", 0)));
+*/
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.hce_request_content_view);

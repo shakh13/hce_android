@@ -23,12 +23,13 @@
             tools:ignore="ContentDescription,HardcodedText" />
 
         <TextView
+            android:id="@+id/hce_request_terminal_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="OOO Shaxzod Saidmurodov"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
-            android:text="OOO Shaxzod Saidmurodov"
             tools:ignore="HardcodedText" />
         <TextView
             android:layout_width="match_parent"
