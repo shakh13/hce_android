@@ -5,6 +5,7 @@
     <color name="colorAccent">#CCC</color>
     <color name="colorWhite">#FFF</color>
     <color name="card_bg">#DDD</color>
+    <color name="colorRed">#F00</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>

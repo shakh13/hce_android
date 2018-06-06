@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">HCE</string>
-    <string name="title_activity_login">Авторизация</string>
-    <string name="title_activity_signup">Регистрация</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_signup">Sign up</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Логин</string>
-    <string name="prompt_password">Пароль</string>
-    <string name="action_sign_in">Войти</string>
-    <string name="action_sign_in_short">Авторизация</string>
+    <string name="prompt_email">Login</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
@@ -16,19 +16,19 @@
         completions."
     </string>
 
-    <string name="registration_button">Регистрация</string>
+    <string name="registration_button">Sign up</string>
 
 
-    <string name="login_hint">Логин</string>
-    <string name="password_hint">Пароль</string>
-    <string name="password2_hint">Ещё раз</string>
+    <string name="login_hint">Login</string>
+    <string name="password_hint">Password</string>
+    <string name="password2_hint">Repeat password</string>
     <string name="email_hint">E-mail</string>
-    <string name="phone_hint">Номер телефона</string>
+    <string name="phone_hint">Phone number</string>
     <string name="title_activity_main2">Main2Activity</string>
 
-    <string name="title_home">Основная карта</string>
-    <string name="title_history">История</string>
-    <string name="title_mycards">Мои карты</string>
+    <string name="title_home">Main card</string>
+    <string name="title_history">History</string>
+    <string name="title_mycards">My cards</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -40,18 +40,27 @@
     <string name="aiddescription">hce.uz</string>
     <string name="nameTxt">Name</string>
     <string name="saveTxt">Save</string>
-    <string name="settings">Настройки</string>
+    <string name="settings">Settings</string>
 
     <string name="title_activity_hcerequest">Request</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">OOO Shaxzod Saidmurodov requestion\n100.000 UZS\nDo you accept this request?</string>
-    <string name="nitify_melody">Мелодия уведомления</string>
-    <string name="settings_volume">Гроскость</string>
-    <string name="settings_vibration">Выбрация</string>
-    <string name="notification">Уведомление</string>
+    <string name="nitify_melody">Notification melody</string>
+    <string name="settings_volume">Volume</string>
+    <string name="settings_vibration">Vibration</string>
+    <string name="notification">Notification</string>
     <string name="card_number">Card_number</string>
     <string name="card_cash">Card_cash</string>
     <string name="_8942">⋮</string>
     <string name="card_name">Card_name</string>
     <string name="card_expdate">Card_expdate</string>
+    <string name="card_activate_btn">Activate</string>
+    <string name="card_delete_btn">Delete</string>
+    <string name="home_page">Home page</string>
+    <string name="profile">Profile</string>
+    <string name="news">News</string>
+    <string name="favorites">Favorites</string>
+    <string name="communication">Communication</string>
+    <string name="share">Share</string>
+    <string name="logout">Log out</string>
 </resources>

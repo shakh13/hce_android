@@ -9,34 +9,29 @@
         <item
             android:id="@+id/menu_home"
             android:icon="@drawable/ic_home_black_18dp"
-            android:title="Домашная страница"
-            tools:ignore="HardcodedText" />
+            android:title="@string/home_page"/>
 
         <item
             android:id="@+id/menu_profile"
             android:icon="@drawable/ic_perm_identity_black_18dp"
-            android:title="Профиль"
-            tools:ignore="HardcodedText" />
+            android:title="@string/profile"/>
 
         <item
             android:id="@+id/menu_news"
             android:icon="@drawable/ic_subscriptions_black_18dp"
-            android:title="Новости"
-            android:visible="false"
-            tools:ignore="HardcodedText" />
+            android:title="@string/news"
+            android:visible="false"/>
 
         <item
             android:id="@+id/menu_favorites"
             android:icon="@drawable/ic_favorite_border_black_18dp"
-            android:title="Избранные"
-            android:visible="false"
-            tools:ignore="HardcodedText" />
+            android:title="@string/favorites"
+            android:visible="false" />
 
         <item
             android:id="@+id/menu_history"
             android:icon="@drawable/ic_schedule_black_18dp"
-            android:title="История"
-            tools:ignore="HardcodedText" />
+            android:title="@string/title_history" />
 
 
         <item
@@ -47,17 +42,16 @@
 
     </group>
 
-    <item android:title="Коммуникация"
-        tools:ignore="HardcodedText">
+    <item android:title="@string/communication">
         <menu>
             <item
                 android:id="@+id/menu_settings"
                 android:icon="@drawable/ic_settings_black_18dp"
-                android:title="Настройки" />
+                android:title="@string/settings" />
             <item
                 android:id="@+id/menu_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Поделиться" />
+                android:title="@string/share" />
         </menu>
     </item>
 
@@ -65,8 +59,7 @@
         <item
             android:id="@+id/menu_exit"
             android:icon="@drawable/ic_power_settings_new_black_18dp"
-            android:title="Выход"
-            tools:ignore="HardcodedText" />
+            android:title="@string/logout" />
     </group>
 
 </menu>

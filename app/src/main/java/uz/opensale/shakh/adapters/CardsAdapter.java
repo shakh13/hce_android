@@ -86,7 +86,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
         holder.name.setText(card.getName());
         holder.cash.setText(String.valueOf(card.getCash()) + " UZS");
         holder.number.setText(card.getNumber());
-        holder.expdate.setText("Срок: " + card.getExp_date());
+        holder.expdate.setText("Expiry date: " + card.getExp_date());
 
         holder.card_contextMenu.setOnClickListener(new View.OnClickListener() {
             @Override

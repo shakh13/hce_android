@@ -9,6 +9,7 @@
     <dimen name="nav_header_height">176sp</dimen>
     <dimen name="fab_margin">16sp</dimen>
     <dimen name="dp32">32sp</dimen>
+    <dimen name="dp18">18sp</dimen>
     <dimen name="dp24">24sp</dimen>
     <dimen name="dp48">48sp</dimen>
 </resources>

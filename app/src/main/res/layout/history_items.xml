@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/history_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5sp"
+    android:padding="@dimen/dp16"
+    android:background="@color/colorWhite"
+    >
+    <RelativeLayout
+        android:id="@+id/history_a"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/history_terminal_and_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/history_terminal_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="terminal_name"
+                android:textSize="@dimen/dp24"
+                android:paddingBottom="@dimen/dp24"/>
+            <TextView
+                android:id="@+id/history_card_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/dp24"
+                android:text="card_number"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/history_uzs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignEnd="@+id/history_terminal_and_card"
+            android:textColor="@color/colorRed"
+            android:textSize="@dimen/dp32"
+            android:padding="@dimen/dp16"
+            android:text="-13000"/>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/history_created_at"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="textEnd"
+        android:text="12.02"
+        android:layout_alignBottom="@+id/history_a"
+        android:layout_marginTop="@dimen/dp24"
+        />
+
+
+</RelativeLayout>
