@@ -24,6 +24,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,6 +36,7 @@ import java.util.Map;
 import uz.opensale.shakh.R;
 import uz.opensale.shakh.Server;
 import uz.opensale.shakh.activity_home;
+import uz.opensale.shakh.fragments.FragmentCards;
 import uz.opensale.shakh.fragments.FragmentMainCard;
 import uz.opensale.shakh.models.Cards;
 
@@ -99,7 +102,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
                         switch (item.getItemId()){
                             case R.id.card_menu_activate:
 
-                                final ProgressDialog progressDialog = new ProgressDialog(activity_home.getContext());
+                                ProgressDialog progressDialog = new ProgressDialog(activity_home.getContext());
                                 progressDialog.setMessage("Wait...");
                                 progressDialog.show();
 
@@ -136,6 +139,47 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
                                         Log.i("HCE", error);
                                     }
                                 });
+
+                                break;
+                            case R.id.card_menu_delete:
+                                ProgressDialog dialog = new ProgressDialog(activity_home.getContext());
+                                dialog.setMessage("Wait...");
+                                dialog.show();
+
+
+                                Map<String, String> param = new HashMap<>();
+                                param.put("auth_key", pref.getString("auth_key", null));
+                                param.put("card_id", String.valueOf(card.getId()));
+
+                                Server srv = new Server(context, "cards/remove", param);
+                                srv.setListener(new Server.ServerListener() {
+                                    @Override
+                                    public void OnResponse(String data) {
+                                        dialog.dismiss();
+                                        try {
+                                            JSONObject jsonObject = new JSONObject(data);
+                                            if (jsonObject.getBoolean("status")){
+                                                FragmentCards.loadcards();
+                                                Toast.makeText(context, "Successfully deleted", Toast.LENGTH_LONG).show();
+
+                                            }
+                                            else {
+                                                Toast.makeText(context, jsonObject.getString("content"), Toast.LENGTH_LONG).show();
+                                            }
+
+                                        }
+                                        catch (JSONException e){
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void OnError(String error) {
+                                        Toast.makeText(context, error, Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                                break;
 
                         }
 

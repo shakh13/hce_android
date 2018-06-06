@@ -33,13 +33,6 @@
             android:icon="@drawable/ic_schedule_black_18dp"
             android:title="@string/title_history" />
 
-
-        <item
-            android:id="@+id/hce_request"
-            android:icon="@drawable/ic_home_black_18dp"
-            android:title="HCE Request"
-            tools:ignore="HardcodedText" />
-
     </group>
 
     <item android:title="@string/communication">

@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="terminal_name"
-                android:textSize="@dimen/dp24"
+                android:textSize="@dimen/dp18"
                 android:paddingBottom="@dimen/dp24"/>
             <TextView
                 android:id="@+id/history_card_number"

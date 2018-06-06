@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,11 +40,11 @@ public class FragmentCards extends Fragment {
 
     RecyclerView recyclerView;
     Realm realm;
-    RecyclerView.Adapter adapter;
     List<Cards> cardsList;
     Context context;
     public SharedPreferences pref;
     public SharedPreferences.Editor editor;
+    public FloatingActionButton fab;
 
     @SuppressLint("CommitPrefEdits")
     @Override
@@ -63,7 +64,14 @@ public class FragmentCards extends Fragment {
 
         cardsList = new ArrayList<>();
 
-        //loadCards();
+        fab = view.findViewById(R.id.card_add_btn);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.fragments, new FragmentAddCard()).commit();
+            }
+        });
 
         return view;
     }
@@ -154,5 +162,9 @@ public class FragmentCards extends Fragment {
     @Override
     public void onDetach(){
         super.onDetach();
+    }
+
+    public static void loadcards() {
+        loadcards();
     }
 }

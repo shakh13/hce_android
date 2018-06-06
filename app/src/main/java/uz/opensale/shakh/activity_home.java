@@ -222,9 +222,6 @@ public class activity_home extends AppCompatActivity
         } else if (id == R.id.navigation_home){
             ft.replace(R.id.fragments, new FragmentMainCard());
             ft.commit();
-        } else if (id == R.id.hce_request){
-            Intent intent = new Intent(this, HCERequestActivity.class);
-            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

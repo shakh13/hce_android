@@ -3,13 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/transactions"
+        android:textSize="@dimen/dp24"
+        android:textAlignment="center"
+        android:padding="10sp"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="50sp"
         android:paddingBottom="72sp"
-        android:background="@color/card_bg">
-    </android.support.v7.widget.RecyclerView>
+        android:background="@color/card_bg" />
 
 </android.support.design.widget.CoordinatorLayout>
