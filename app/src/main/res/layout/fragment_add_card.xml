@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="70sp">
     <TextView
+        android:id="@+id/fragment_add_card_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_card"
@@ -11,5 +14,82 @@
         android:textAlignment="center"
         android:padding="10sp"/>
 
+
+    <LinearLayout
+        android:id="@+id/fragment_add_card_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dp16"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_card_title">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/card_number" />
+
+        <EditText
+            android:id="@+id/fragment_Add_card_card_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/card_num_ex"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="@string/card_expdate" />
+
+        <EditText
+            android:id="@+id/fragment_add_card_expdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/exp_date_ex"
+            android:inputType="date" />
+
+        <Button
+            android:id="@+id/fragment_add_card_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_add_card_verify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_card_form">
+
+        <TextView
+            android:id="@+id/fragment_add_card_timer_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/timer"
+            android:textAlignment="center"
+            android:textSize="@dimen/dp24" />
+
+        <EditText
+            android:id="@+id/fragment_add_card_sms_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/code"
+            android:inputType="number"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/fragment_add_card_verify_code_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/virify" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

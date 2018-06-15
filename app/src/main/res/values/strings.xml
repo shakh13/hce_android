@@ -49,11 +49,11 @@
     <string name="settings_volume">Volume</string>
     <string name="settings_vibration">Vibration</string>
     <string name="notification">Notification</string>
-    <string name="card_number">Card_number</string>
+    <string name="card_number">Card number</string>
     <string name="card_cash">Card_cash</string>
     <string name="_8942">⋮</string>
     <string name="card_name">Card_name</string>
-    <string name="card_expdate">Card_expdate</string>
+    <string name="card_expdate">Expiry date</string>
     <string name="card_activate_btn">Activate</string>
     <string name="card_delete_btn">Delete</string>
     <string name="home_page">Home page</string>
@@ -66,4 +66,10 @@
     <string name="my_cards">My cards</string>
     <string name="transactions">Transactions</string>
     <string name="add_card">Add card</string>
+    <string name="add">Add</string>
+    <string name="timer">00:00</string>
+    <string name="code">CODE</string>
+    <string name="virify">Virify</string>
+    <string name="card_num_ex">86001234567890123456</string>
+    <string name="exp_date_ex">12/21</string>
 </resources>
