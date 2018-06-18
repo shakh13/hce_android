@@ -1,14 +1,11 @@
 package uz.opensale.shakh;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -22,11 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import io.realm.Realm;
 import uz.opensale.shakh.fragments.FragmentCards;
@@ -34,13 +27,12 @@ import uz.opensale.shakh.fragments.FragmentHistory;
 import uz.opensale.shakh.fragments.FragmentMainCard;
 import uz.opensale.shakh.fragments.FragmentSettings;
 import uz.opensale.shakh.models.Cards;
-import uz.opensale.shakh.services.HCEService;
 
 public class activity_home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnNavigationItemSelectedListener {
 
     public static boolean HCE_ENABLED = false;
-    public static boolean HCE_REQUEST_WAIT = false;
+    //public static boolean HCE_REQUEST_WAIT = false;
     public static int HCE_REQUEST_ALLOW = -1;
     public static int HCE_CURRENT_TERMINAL_ID = 0;
     public static String HCE_CURRENT_TERMINAL_NAME = "";
@@ -102,7 +94,7 @@ public class activity_home extends AppCompatActivity
 
         View mainMenuHeaderView = navigationView.getHeaderView(0); // Get main menu header view
         TextView mainMenuName = mainMenuHeaderView.findViewById(R.id.main_menu_username);   // Get main menu username text
-        TextView mainMenuPhone = mainMenuHeaderView.findViewById(R.id.main_menu_userphone); // Get main menu user phone text
+        //TextView mainMenuPhone = mainMenuHeaderView.findViewById(R.id.main_menu_userphone); // Get main menu user phone text
 
 
         mainMenuName.setText(checkUser.getUserFullname());  // Set main menu username
@@ -222,6 +214,9 @@ public class activity_home extends AppCompatActivity
         } else if (id == R.id.navigation_home){
             ft.replace(R.id.fragments, new FragmentMainCard());
             ft.commit();
+        } else if (id == R.id.menu_hce){
+            Intent intent = new Intent(this, HCERequestActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
