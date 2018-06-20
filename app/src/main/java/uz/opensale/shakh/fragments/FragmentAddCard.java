@@ -8,12 +8,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,17 +111,38 @@ public class FragmentAddCard extends Fragment {
 
             @Override
             public void onClick(View view) {
-                if (Integer.valueOf(String.valueOf(sms_code.getText())) == verify_code){
-                    FragmentManager fm = ((Activity) activity_home.getContext()).getFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.fragments, new FragmentCards());
-                    ft.commit();
-                }
-                else {
-                    sms_code.setText("");
-                    sms_code.setFocusable(true);
-                    Snackbar.make(view, "Wrong code", Snackbar.LENGTH_SHORT).show();
-                }
+
+                Map<String, String> params = new HashMap<>();
+                params.put("auth_key", pref.getString("auth_key", null));
+                params.put("code", sms_code.getText().toString());
+
+                Server server = new Server(activity_home.getContext(), "cards/verifyadd", params);
+                server.setListener(new Server.ServerListener() {
+                    @Override
+                    public void OnResponse(String data) {
+                        try {
+                            JSONObject json = new JSONObject(data);
+                            if (json.getBoolean("status")){
+                                FragmentManager fm = ((Activity) activity_home.getContext()).getFragmentManager();
+                                FragmentTransaction ft = fm.beginTransaction();
+                                ft.replace(R.id.fragments, new FragmentCards());
+                                ft.commit();
+                            }
+                            else {
+                                sms_code.setText("");
+                                Snackbar.make(view, json.getString("content"), Snackbar.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            Snackbar.make(view, e.toString(), Snackbar.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void OnError(String error) {
+                        Snackbar.make(view, error, Snackbar.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
