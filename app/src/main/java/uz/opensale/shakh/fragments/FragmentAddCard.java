@@ -126,7 +126,7 @@ public class FragmentAddCard extends Fragment {
                                 FragmentManager fm = ((Activity) activity_home.getContext()).getFragmentManager();
                                 FragmentTransaction ft = fm.beginTransaction();
                                 ft.replace(R.id.fragments, new FragmentCards());
-                                ft.commit(); //
+                                ft.commit();
                             }
                             else {
                                 sms_code.setText("");
